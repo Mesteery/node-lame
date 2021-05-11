@@ -2,19 +2,17 @@
 /**
  * The `Decoder` accepts an MP3 file and outputs raw PCM data.
  */
-
-exports.Decoder = require('./lib/decoder');
+export * from './lib/decoder.js';
 
 /**
  * The `Encoder` accepts raw PCM data and outputs an MP3 file.
  */
-
-exports.Encoder = require('./lib/encoder');
+export * from './lib/encoder.js';
 
 /*
  * Channel Modes
  */
-exports.STEREO = 0;
-exports.JOINTSTEREO = 1;
-exports.DUALCHANNEL = 2;
-exports.MONO = 3;
+export const STEREO = 0;
+export const JOINTSTEREO = 1;
+export const DUALCHANNEL = 2;
+export const MONO = 3;
