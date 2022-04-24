@@ -11,11 +11,17 @@
 /* Define if building universal (internal helper macro) */
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
+/* Define if .balign is present. */
+#define ASMALIGN_BALIGN 1
+
+/* Define if .align just takes byte count. */
+/* #undef ASMALIGN_BYTE */
+
 /* Define if .align takes 3 for alignment of 2^3=8 bytes instead of 8. */
-#define ASMALIGN_EXP 1
+/* #undef ASMALIGN_EXP */
 
 /* Define if __attribute__((aligned(16))) shall be used */
-/* #undef CCALIGN */
+#define CCALIGN 1
 
 /* Define if debugging is enabled. */
 /* #undef DEBUG */
@@ -24,7 +30,10 @@
 #define DEFAULT_OUTPUT_MODULE "oss"
 
 /* Define if building with dynamcally linked libmpg123 */
-/* #undef DYNAMIC_BUILD */
+#define DYNAMIC_BUILD 1
+
+/* Use EFBIG as substitude for EOVERFLOW, mingw.org may lack the latter */
+/* #undef EOVERFLOW */
 
 /* Define if FIFO support is enabled. */
 #define FIFO 1
@@ -74,8 +83,20 @@
 /* Define to 1 if you have the <CUlib.h> header file. */
 /* #undef HAVE_CULIB_H */
 
+/* Define to 1 if you have the <dirent.h> header file. */
+#define HAVE_DIRENT_H 1
+
+/* Define to 1 if you have the `dlclose' function. */
+#define HAVE_DLCLOSE 1
+
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define HAVE_DLFCN_H 1
+
+/* Define to 1 if you have the `dlopen' function. */
+#define HAVE_DLOPEN 1
+
+/* Define to 1 if you have the `dlsym' function. */
+#define HAVE_DLSYM 1
 
 /* Define if getaddrinfo accepts the AI_ADDRCONFIG flag */
 #define HAVE_GAI_ADDRCONFIG 1
@@ -109,9 +130,6 @@
 
 /* Define to 1 if you have the <locale.h> header file. */
 #define HAVE_LOCALE_H 1
-
-/* Define if libltdl is available */
-/* #undef HAVE_LTDL */
 
 /* Define to 1 if you have the <machine/soundcard.h> header file. */
 /* #undef HAVE_MACHINE_SOUNDCARD_H */
@@ -182,9 +200,6 @@
 /* Define to 1 if you have the <stdlib.h> header file. */
 #define HAVE_STDLIB_H 1
 
-/* Define to 1 if you have the `strdup' function. */
-#define HAVE_STRDUP 1
-
 /* Define to 1 if you have the `strerror' function. */
 #define HAVE_STRERROR 1
 
@@ -211,6 +226,9 @@
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #define HAVE_SYS_RESOURCE_H 1
+
+/* Define to 1 if you have the <sys/select.h> header file. */
+#define HAVE_SYS_SELECT_H 1
 
 /* Define to 1 if you have the <sys/signal.h> header file. */
 #define HAVE_SYS_SIGNAL_H 1
@@ -246,7 +264,7 @@
 /* #undef HAVE_WS2TCPIP_H */
 
 /* Define to indicate that float storage follows IEEE754. */
-/* #undef IEEE_FLOAT */
+#define IEEE_FLOAT 1
 
 /* size of the frame index seek table */
 #define INDEX_SIZE 1000
@@ -254,31 +272,39 @@
 /* Define if IPV6 support is enabled. */
 #define IPV6 1
 
-/* Define this to the size of long type in bits, used for LFS small/native
-   alias functions. */
-#define LFS_ALIAS_BITS 32
+/* Define this to the size of native offset type in bits, used for LFS alias
+   functions. */
+#define LFS_ALIAS_BITS 64
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the extension used for runtime loadable modules, say, ".so". */
+#define LT_MODULE_EXT ".so"
+
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"
 
-/* The suffix for module files. */
-#define MODULE_FILE_SUFFIX ".la"
+/* Define to the shared library suffix, say, ".dylib". */
+/* #undef LT_SHARED_EXT */
+
+/* Define to the shared archive member specification, say "(shr.o)". */
+/* #undef LT_SHARED_LIB_MEMBER */
 
 /* Define if network support is enabled. */
-/* #undef NETWORK */
+#define NETWORK 1
 
 /* Define to disable 16 bit integer output. */
 /* #undef NO_16BIT */
 
 /* Define to disable 32 bit and 24 bit integer output. */
-#define NO_32BIT 1
+/* #undef NO_32BIT */
 
 /* Define to disable 8 bit integer output. */
 /* #undef NO_8BIT */
 
 /* Define to disable downsampled decoding. */
 /* #undef NO_DOWNSAMPLE */
+
+/* Define to disable equalizer. */
+/* #undef NO_EQUALIZER */
 
 /* Define to disable error messages in combination with a return value (the
    return is left intact). */
@@ -309,10 +335,13 @@
 /* #undef NO_NTOM */
 
 /* Define to disable real output. */
-#define NO_REAL 1
+/* #undef NO_REAL */
 
 /* Define to disable string functions. */
 /* #undef NO_STRING */
+
+/* Define for post-processed 32 bit formats. */
+/* #undef NO_SYNTH32 */
 
 /* Define to disable warning messages. */
 /* #undef NO_WARNING */
@@ -321,13 +350,13 @@
 #define PACKAGE "mpg123"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "mpg123-devel@lists.sourceforge.net"
+#define PACKAGE_BUGREPORT "maintainer@mpg123.org"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "mpg123"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "mpg123 1.14.4"
+#define PACKAGE_STRING "mpg123 1.25.10"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "mpg123"
@@ -336,7 +365,7 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.14.4"
+#define PACKAGE_VERSION "1.25.10"
 
 /* Define if portaudio v18 API is wanted. */
 /* #undef PORTAUDIO18 */
@@ -345,16 +374,16 @@
 #define SIZEOF_INT32_T 4
 
 /* The size of `long', as computed by sizeof. */
-#define SIZEOF_LONG 4
+#define SIZEOF_LONG 8
 
 /* The size of `off_t', as computed by sizeof. */
 #define SIZEOF_OFF_T 8
 
 /* The size of `size_t', as computed by sizeof. */
-#define SIZEOF_SIZE_T 4
+#define SIZEOF_SIZE_T 8
 
 /* The size of `ssize_t', as computed by sizeof. */
-#define SIZEOF_SSIZE_T 4
+#define SIZEOF_SSIZE_T 8
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
@@ -362,8 +391,14 @@
 /* Define if modules are enabled */
 /* #undef USE_MODULES */
 
+/* Define for new Huffman decoding scheme. */
+#define USE_NEW_HUFFTABLE 1
+
+/* Define to use yasm for assemble AVX sources. */
+/* #undef USE_YASM_FOR_AVX */
+
 /* Version number of package */
-#define VERSION "1.14.4"
+#define VERSION "1.25.10"
 
 /* Define to use Win32 named pipes */
 /* #undef WANT_WIN32_FIFO */
@@ -395,7 +430,7 @@
 #endif
 
 /* Number of bits in a file offset, on hosts where this is settable. */
-#define _FILE_OFFSET_BITS 64
+/* #undef _FILE_OFFSET_BITS */
 
 /* Define for large files, on AIX-style hosts. */
 /* #undef _LARGE_FILES */
@@ -417,6 +452,12 @@
 
 /* Define to `int' if <sys/types.h> does not define. */
 /* #undef int32_t */
+
+/* Define to `long long' if <sys/types.h> does not define. */
+/* #undef int64_t */
+
+/* Define to the native offset type (long or actually off_t). */
+#define lfs_alias_t off_t
 
 /* Define to `long int' if <sys/types.h> does not define. */
 /* #undef off_t */
